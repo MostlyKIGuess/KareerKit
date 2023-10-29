@@ -12,7 +12,7 @@ https://gamma.app/docs/KareerKit-A-Future-You-Can-Trust-In-vjuonlrtkupgc4l?mode=
 
 Made using Gamma AI
 
--Also another repo of enneagram guesser is a website we would be using alongside as a self asssesment from the user.
+- Also another repo of enneagram guesser is a website we would be using alongside as a self asssesment from the user.
 
 - Resources used, this includes articles and research papers to back up our program : 
 https://www.forbes.com/?sh=69ed7b742254
