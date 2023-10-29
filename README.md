@@ -4,6 +4,8 @@
 https://kareerkit.teleporthq.app/
 
 using teleportHQ AI
+- For the candidate results would look somewhatlike this:
+ https://profilepersonkareerkit.unicornplatform.page/
 
 - Further links are interconnected.
 - This is interlinked with our idea - https://github.com/MostlyKIGuess/enneagram-guesser
