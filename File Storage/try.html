@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <label>
+                I am always thinking about how I could have done something better.
+                <br>
+                <input type="radio" name="q0" value="1"> Agree
+                <input type="radio" name="q0" value="0"> Neutral
+                <input type="radio" name="q0" value="-1"> Disagree
+            </label>
+
+            <!-- Question 2 -->
+            <label>
+                Part of me criticizes everything I do.
+                <br>
+                <input type="radio" name="q1" value="1"> Agree
+                <input type="radio" name="q1" value="0"> Neutral
+                <input type="radio" name="q1" value="-1"> Disagree
+            </label>
+
+            <!-- Question 3 -->
+            <label>
+                I am critical of people who do not take responsibility for their own lives.
+                <br>
+                <input type="radio" name="q2" value="1"> Agree
+                <input type="radio" name="q2" value="0"> Neutral
+                <input type="radio" name="q2" value="-1"> Disagree
+            </label>
+
+            <!-- Question 4 -->
+            <label>
+                I often have to redo other people's work.
+                <br>
+                <input type="radio" name="q3" value="1"> Agree
+                <input type="radio" name="q3" value="0"> Neutral
+                <input type="radio" name="q3" value="-1"> Disagree
+            </label>
+
+            <!-- Question 5 -->
+            <label>
+                I keep my belongings in order.
+                <br>
+                <input type="radio" name="q4" value="1"> Agree
+                <input type="radio" name="q4" value="0"> Neutral
+                <input type="radio" name="q4" value="-1"> Disagree
+            </label>
+
+            <!-- Question 6 -->
+            <label>
+                I am a perfectionist.
+                <br>
+                <input type="radio" name="q5" value="1"> Agree
+                <input type="radio" name="q5" value="0"> Neutral
+                <input type="radio" name="q5" value="-1"> Disagree
+            </label>
+
+            <!-- Question 7 -->
+            <label>
+                I pay careful attention to details.
+                <br>
+                <input type="radio" name="q6" value="1"> Agree
+                <input type="radio" name="q6" value="0"> Neutral
+                <input type="radio" name="q6" value="-1"> Disagree
+            </label>
+
+            <!-- Question 8 -->
+            <label>
+                I have difficulty saying "no".
+                <br>
+                <input type="radio" name="q7" value="1"> Agree
+                <input type="radio" name="q7" value="0"> Neutral
+                <input type="radio" name="q7" value="-1"> Disagree
+            </label>
+
+            <!-- Question 9 -->
+            <label>
+                I am very accepting and flexible.
+                <br>
+                <input type="radio" name="q8" value="1"> Agree
+                <input type="radio" name="q8" value="0"> Neutral
+                <input type="radio" name="q8" value="-1"> Disagree
+            </label>
+        </form>
+        <button id="submit-button">Submit</button>
+    </div>
+    <div id="result-container"></div>
+    <script>
+        const quizData = [
+            {
+                question: "I am always thinking about how I could have done something better.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "Part of me criticizes everything I do.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I am critical of people who do not take responsibility for their own lives.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I often have to redo other people's work.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I keep my belongings in order.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I am a perfectionist.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I pay careful attention to details.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I have difficulty saying 'no'.",
+                options: [1, 0, -1]
+            },
+            {
+                question: "I am very accepting and flexible.",
+                options: [1, 0, -1]
+            }
+        ];
+
+        const form = document.getElementById("quiz-form");
+        const resultContainer = document.getElementById("result-container");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const answers = [];
+            for (let i = 0; i < quizData.length; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!selectedOption) {
+                    answers.push(0); // Default value if no option is selected
+                } else {
+                    answers.push(parseInt(selectedOption.value));
+                }
+            }
+            const totalScore = answers.reduce((a, b) => a + b, 0);
+            resultContainer.innerHTML = `Total Score: ${totalScore}`;
+        });
+    </script>
+</body>
+</html>
