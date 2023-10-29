@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f5e5;
+        }
+
+        #quiz-form {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #question-text {
+            font-size: 18px;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label {
+            cursor: pointer;
+            color: #3498db;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        label:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            font-size: 20px;
+        }
+
+        label:hover {
+            background-color: #3498db;
+        }
+
+        input[type="radio"]:checked + label {
+            background-color: #34495e;
+            color: #fff;
+        }
+
+        #next-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        #next-button:hover {
+            background-color: #2980b9;
+        }
+
+        #result-container {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="quiz-form">
+        <div id="question-container">
+            <p id="question-text"></p>
+            <div id="options-container">
+                <input type="radio" name="q" value="5" id="agree-option">
+                <label for="agree-option">Agree</label>
+                <input type="radio" name="q" value="4" id="slightly-agree-option">
+                <label for="slightly-agree-option">Slightly Agree</label>
+                <input type="radio" name="q" value="3" id="neutral-option">
+                <label for="neutral-option">Neutral</label>
+                <input type="radio" name="q" value="2" id="slightly-disagree-option">
+                <label for= "slightly-disagree-option">Slightly Disagree</label>
+                <input type="radio" name="q" value="1" id="disagree-option">
+                <label for="disagree-option">Disagree</label>
+            </div>
+        </div>
+        <button type="button" id="next-button">Next</button>
+    </form>
+    <button type="button" id="show-results-button">Show Results</button>
+
+    <div id="result-container"></div>
+
+    <script>
+        // Your questions and answers here
+        const questions = [
+            "I am a perfectionist.",
+            "My relationships with others are what my life is about.",
+            "I put work first.",
+            "I daydream about being in love.",
+            "I have a hard time showing emotions.",
+            "Fear of being taken advantage of keeps me from being more trusting.",
+            "I must always be having new experiences.",
+            "I naturally emerge as a leader.",
+            "When other people are arguing, I leave the room.",
+            "I strive for efficiency.",
+            "I have difficulty saying no.",
+            "I like to stand out.",
+            "I really enjoy feeling bitter sweet.",
+            "I spend hours alone with my hobbies.",
+            "I get input from others before I make a decision.",
+            "I can keep a conversation going with anyone about anything.",
+            "I like a conversation where no one agrees.",
+            "I keep my thoughts to myself, to prevent trouble.",
+            "I often have to redo other people's work.",
+            "I get lots of satisfaction from helping others achieve their goals.",
+            "It is good to wake up to a full day of planned activities.",
+            "I cry.",
+            "I spend most of my time trying to understand things.",
+            "I conform.",
+            "I am uninhibited.",
+            "I want people to tell me the truth, not spare my feelings.",
+            "I am very accepting and flexible.",
+            "I keep my belongings in order.",
+            "I put family first.",
+            "Money is important to my happiness.",
+            "I side with the rebels over the establishment.",
+            "I like mental challenges.",
+            "I am loyal.",
+            "I always try to break the tension with a good joke.",
+            "I prefer it when leaders are decisive.",
+            "I avoid confrontation."
+        ];
+
+        const userAnswers = [];
+        let currentQuestionIndex = 0;
+        const questionText = document.getElementById("question-text");
+        const options = document.querySelectorAll('input[type="radio"]');
+        const nextButton = document.getElementById("next-button");
+
+        function loadQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                questionText.innerText = questions[currentQuestionIndex];
+                options.forEach(option => option.checked = false);
+            } else {
+                calculatePersonalities();
+            }
+        }
+        const showResultsButton = document.getElementById("show-results-button");
+        showResultsButton.addEventListener("click", () => {
+            generateResultsTable();
+        });
+
+        loadQuestion();
+
+        nextButton.addEventListener("click", () => {
+            const selectedOption = document.querySelector('input[type="radio"]:checked');
+            if (selectedOption) {
+                userAnswers.push(parseFloat(selectedOption.value));
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        });
+
+  
+        function calculatePersonalities() {
+            const personality1Score = userAnswers.reduce((acc, val, index) => index % 9 === 1 ? acc + val : acc, 0);
+            const personality2Score = userAnswers.reduce((acc, val, index) => index % 9 === 2 ? acc + val : acc, 0);
+            const personality3Score = userAnswers.reduce((acc, val, index) => index % 9 === 3 ? acc + val : acc, 0);
+            const personality4Score = userAnswers.reduce((acc, val, index) => index % 9 === 4 ? acc + val : acc, 0);
+            const personality5Score = userAnswers.reduce((acc, val, index) => index % 9 === 5 ? acc + val : acc, 0);
+            const personality6Score = userAnswers.reduce((acc, val, index) => index % 9 === 6 ? acc + val : acc, 0);
+            const personality7Score = userAnswers.reduce((acc, val, index) => index % 9 === 7 ? acc + val : acc, 0);
+            const personality8Score = userAnswers.reduce((acc, val, index) => index % 9 === 8 ? acc + val : acc, 0);
+            const personality9Score = userAnswers.reduce((acc, val, index) => index % 9 === 0 ? acc + val : acc, 0);
+
+            const resultContainer = document.getElementById("result-container");
+            resultContainer.innerHTML = `
+                Personality 1 Score: ${personality1Score}<br>
+                Personality 2 Score: ${personality2Score}<br>
+                Personality 3 Score: ${personality3Score}<br>
+                Personality 4 Score: ${personality4Score}<br>
+                Personality 5 Score: ${personality5Score}<br>
+                Personality 6 Score: ${personality6Score}<br>
+                Personality 7 Score: ${personality7Score}<br>
+                Personality 8 Score: ${personality8Score}<br>
+                Personality 9 Score: ${personality9Score}
+            `;
+        }
+    </script>
+</body>
+</html>

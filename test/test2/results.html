@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personality Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f5e5;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table, th, td {
+            border: 1px solid #333;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Personality Result</h2>
+    <table>
+        <tr>
+            <th>Personality</th>
+            <th>Score</th>
+        </tr> <!-- Fill in the table rows with personality scores using JavaScript -->
+    </table>
+
+    <h2>Your Main Personality</h2>
+    <p id="main-personality"></p>
+    <script>
+    // Replace this sample data with your actual personality scores
+    const personalityResults = [
+        { personality: "Personality 1", score: personality1Score },
+        { personality: "Personality 2", score: personality2Score },
+        { personality: "Personality 3", score: personality3Score },
+        { personality: "Personality 4", score: personality4Score },
+        { personality: "Personality 5", score: personality5Score },
+        { personality: "Personality 6", score: personality6Score },
+        { personality: "Personality 7", score: personality7Score },
+        { personality: "Personality 8", score: personality8Score },
+        { personality: "Personality 9", score: personality9Score },
+    ];
+
+    // Sort the personality results by score in descending order
+    personalityResults.sort((a, b) => b.score - a.score);
+
+    // Get a reference to the table
+    const table = document.querySelector("table");
+
+    // Loop through the sorted results and populate the table
+    personalityResults.forEach((result) => {
+        const row = table.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = result.personality;
+        cell2.innerHTML = result.score;
+    });
+</script>
+
+<!-- ... (remaining HTML code) ... -->
+</body>
+</html>

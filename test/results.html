@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Results</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            background-color: cream;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: lightblue;
+        }
+        tr:nth-child(even) {
+            background-color: lightnavyblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personality Scores</h1>
+    <table>
+        <tr>
+            <th>Personality</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td>Personality 1</td>
+            <td id="p0-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 2</td>
+            <td id="p1-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 3</td>
+            <td id="p2-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 4</td>
+            <td id="p3-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 5</td>
+            <td id="p4-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 6</td>
+            <td id="p5-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 7</td>
+            <td id="p6-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 8</td>
+            <td id="p7-score"></td>
+        </tr>
+        <tr>
+            <td>Personality 9</td>
+            <td id="p8-score"></td>
+        </tr>
+    </table>
+
+    <script>
+        // Retrieve scores from query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const scores = [];
+        for (let i = 0; i < 9; i++) {
+            scores.push(parseFloat(urlParams.get(`p${i}`)));
+        }
+
+        // Display scores in the table
+        for (let i = 0; i < 9; i++) {
+            document.getElementById(`p${i}-score`).textContent = scores[i].toFixed(2);
+        }
+    </script>
+</body>
+</html>
