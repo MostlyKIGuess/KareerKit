@@ -12,8 +12,6 @@ using teleportHQ AI
 
 
 
-Made using Gamma AI
-
 - Also another repo of enneagram guesser is a website we would be using alongside as a self asssesment from the user.
 
 - Resources used, this includes articles and research papers to back up our program : 
