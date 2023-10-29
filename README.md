@@ -6,6 +6,7 @@ https://kareerkit.teleporthq.app/
 using teleportHQ AI
 
 - Further links are interconnected.
+- This is interlinked with our idea - https://github.com/MostlyKIGuess/enneagram-guesser
 
 - Pre-Jury Presentation:
 https://gamma.app/docs/KareerKit-A-Future-You-Can-Trust-In-vjuonlrtkupgc4l?mode=doc#card-mrewph2sgzvcg2n
