@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Recommendation</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Job Recommendation</h1>
+        <p>Find your top 5 job recommendations based on your personality.</p>
+
+        <div class="input-section">
+            <label for="mbti">MBTI Type:</label>
+            <input type="text" id="mbti" placeholder="Enter your MBTI type (e.g., INTJ)">
+        </div>
+
+        <div class="input-section">
+            <label for="enneagram">Enneagram Type:</label>
+            <input type text="text" id="enneagram" placeholder="Enter your Enneagram type (e.g., Type 5)">
+        </div>
+
+        <button onclick="getJobRecommendations()">Get Recommendations</button>
+
+        <div class="result">
+            <h2>Top 5 Job Recommendations:</h2>
+            <ol id="job-list"></ol>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
