@@ -66,7 +66,6 @@ async def test_async_list(providers: list[type[BaseProvider]]):
     ]
     return await asyncio.gather(*responses)
 
-
 def print_providers():
     lines = [
         "| Website| Provider| gpt-3.5 | gpt-4 | Streaming | Asynchron | Status | Auth |",
@@ -78,34 +77,31 @@ def print_providers():
 
     for is_working in (True, False):
         for idx, _provider in enumerate(providers):
-            if is_working != _provider.working:
+            if is_working != _provider.working or _provider == RetryProvider:
                 continue
-            if _provider == RetryProvider:
-                continue
-            
-            netloc = urlparse(_provider.url).netloc
-            website = f"[{netloc}]({_provider.url})"
 
-            provider_name = f"`g4f.Provider.{_provider.__name__}`"
+            lines.append(format_provider_line(_provider, responses[idx]))
 
-            has_gpt_35 = "✔️" if _provider.supports_gpt_35_turbo else "❌"
-            has_gpt_4 = "✔️" if _provider.supports_gpt_4 else "❌"
-            stream = "✔️" if _provider.supports_stream else "❌"
-            can_async = "✔️" if issubclass(_provider, AsyncProvider) else "❌"
-            if _provider.working:
-                status = '![Active](https://img.shields.io/badge/Active-brightgreen)'
-                if responses[idx]:
-                    status = '![Active](https://img.shields.io/badge/Active-brightgreen)'
-                else:
-                    status = '![Unknown](https://img.shields.io/badge/Unknown-grey)'
-            else:
-                status = '![Inactive](https://img.shields.io/badge/Inactive-red)'
-            auth = "✔️" if _provider.needs_auth else "❌"
-
-            lines.append(
-                f"| {website} | {provider_name} | {has_gpt_35} | {has_gpt_4} | {stream} | {can_async} | {status} | {auth} |"
-            )
     print("\n".join(lines))
+
+def format_provider_line(provider, response):
+    netloc = urlparse(provider.url).netloc
+    website = f"[{netloc}]({provider.url})"
+    provider_name = f"`g4f.Provider.{provider.__name__}`"
+    has_gpt_35 = "✔️" if provider.supports_gpt_35_turbo else "❌"
+    has_gpt_4 = "✔️" if provider.supports_gpt_4 else "❌"
+    stream = "✔️" if provider.supports_stream else "❌"
+    can_async = "✔️" if issubclass(provider, AsyncProvider) else "❌"
+    status = get_provider_status(provider, response)
+    auth = "✔️" if provider.needs_auth else "❌"
+
+    return f"| {website} | {provider_name} | {has_gpt_35} | {has_gpt_4} | {stream} | {can_async} | {status} | {auth} |"
+
+def get_provider_status(provider, response):
+    if provider.working:
+        return '![Active](https://img.shields.io/badge/Active-brightgreen)' if response else '![Unknown](https://img.shields.io/badge/Unknown-grey)'
+    else:
+        return '![Inactive](https://img.shields.io/badge/Inactive-red)'
 
 def print_models():
     base_provider_names = {

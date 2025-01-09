@@ -18,12 +18,6 @@ async def run_provider(provider: g4f.Provider.BaseProvider):
             provider=provider,
         )
         print(f"{provider.__name__}:", response)
-        flag=0
     except Exception as e:
         print(f"{provider.__name__}:", e)
         
-async def run_all():
-    calls = [
-        run_provider(provider) for provider in _providers
-    ]
-asyncio.run(run_all())

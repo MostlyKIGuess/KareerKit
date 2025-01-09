@@ -55,26 +55,12 @@ def extract_features(tweets):
 # Define function to train machine learning model
 def train_model(features, labels):
     # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)
-    # Train Random Forest Classifier
+    x_train, x_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)    # Train Random Forest Classifier
     clf = RandomForestClassifier(n_estimators=100, random_state=42)
-    clf.fit(X_train, y_train)
+    clf.fit(x_train, y_train)
     # Evaluate model on testing set
-    accuracy = clf.score(X_test, y_test)
+    accuracy = clf.score(x_test, y_test)
     print("Accuracy:", accuracy)
     return clf
 
-# Define main function
-def main():
-    # Collect tweets data for a user
-    tweets = collect_tweets("USERNAME")
-    # Load MBTI labels
-    with open("mbti_labels.txt", "r") as f:
-        labels = f.read().splitlines()
-    # Extract features from tweets data
-    features = extract_features(tweets)
-    # Train machine learning model
-    model = train_model(features, labels)
 
-if __name__ == "__main__":
-    main()

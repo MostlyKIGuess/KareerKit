@@ -10,7 +10,6 @@ async def log_time_async(method: callable, **kwargs):
 
 def log_time_yield(method: callable, **kwargs):
     start = time()
-    result = yield from method(**kwargs)
     yield f" {round(time() - start, 2)} secs"
 
 
