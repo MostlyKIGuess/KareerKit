@@ -78,8 +78,7 @@ class StreamResponse:
             yield chunk
 
     async def read(self) -> bytes:
-        return b"".join([chunk async for chunk in self.iter_content()])
-
+        return (chunk async for chunk in self.iter_content())   
 
 class StreamRequest:
     def __init__(self, session: AsyncSession, method: str, url: str, **kwargs: Union[bool, int, str]) -> None:
