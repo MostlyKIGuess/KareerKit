@@ -399,7 +399,7 @@ const load_conversations = async (limit, offset, loader) => {
     });
 };
 
-document.getElementById(`cancelButton`).addEventListener(`click`, async () => {
+document.getElementById(`cancelButton`).addEventListener(`click`, () => {
     window.controller.abort();
     console.log(`aborted ${window.conversation_id}`);
 });
@@ -551,22 +551,22 @@ window.onload = async () => {
     // await load_models();
     await say_hello()
     
-    message_input.addEventListener(`keydown`, async (evt) => {
+    message_input.addEventListener(`keydown`, (evt) => {
         if (prompt_lock) return;
         if (evt.keyCode === 13 && !evt.shiftKey) {
             evt.preventDefault();
             console.log("pressed enter");
-            await handle_ask();
+            handle_ask();
         } else {
             message_input.style.removeProperty("height");
-            message_input.style.height = message_input.scrollHeight  + "px";
+            message_input.style.height = message_input.scrollHeight + "px";
         }
     });
     
-    send_button.addEventListener(`click`, async () => {
+    send_button.addEventListener(`click`, () => {
         console.log("clicked send");
         if (prompt_lock) return;
-        await handle_ask();
+        handle_ask();
     });
 
     register_settings_localstorage();
